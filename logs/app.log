@@ -1,0 +1,32 @@
+2026-04-26 01:04:37.322 INFO  [main] com.prod.ProdApplicationTests : Starting ProdApplicationTests using Java 17.0.10 with PID 27636 (started by Admin in C:\Users\Admin\Downloads\prod\prod)
+2026-04-26 01:04:37.330 INFO  [main] com.prod.ProdApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2026-04-26 01:04:38.440 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-26 01:04:38.522 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 1 JPA repository interface.
+2026-04-26 01:04:39.453 INFO  [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-26 01:04:39.553 INFO  [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-26 01:04:40.378 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-26 01:04:40.439 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-04-26 01:04:40.995 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@acd115d
+2026-04-26 01:04:40.999 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-04-26 01:04:41.194 INFO  [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/production?createDatabaseIfNotExist=true]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.37
+	Default catalog/schema: production/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-26 01:04:42.912 INFO  [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-26 01:04:43.009 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-26 01:04:43.179 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-26 01:04:43.609 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-26 01:04:44.314 INFO  [main] com.prod.ProdApplicationTests : Started ProdApplicationTests in 7.756 seconds (process running for 9.884)
+2026-04-26 01:04:44.976 DEBUG [main] com.prod.services.PostServiceImpl : finding post by post id 100
+2026-04-26 01:04:45.177 ERROR [main] com.prod.services.PostServiceImpl : no post found with id 100
+2026-04-26 01:04:45.230 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-26 01:04:45.234 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-04-26 01:04:45.256 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.

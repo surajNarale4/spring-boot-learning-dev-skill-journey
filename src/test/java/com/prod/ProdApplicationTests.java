@@ -40,77 +40,11 @@ class ProdApplicationTests {
 				.body(new ParameterizedTypeReference<List<Student>>(){}));
 
 	}
-	@Test
-	void duplicate(){
-		Map<String, Object> req = new HashMap<>();
-		req.put("id", 1);
-		req.put("name", "Babu");
-		req.put("age", 20);
-		req.put("grade", "A");
-		req.put("email", "babu@gmail.com");
-
-
-		String res = restClient.post()
-				.uri("/student/")
-				.contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-				.body(req)
-				.retrieve()
-				.body(String.class);
-
-		System.out.println(res);
-	}
 
 	@Test
-	void s(){
-
-		System.out.println(restClient.post().uri("/s").body("Hello").retrieve().body(String.class));
-
+	void l(){
+		postService.getPostById(100L);
 	}
 
-	@Test
-	void test(){
-		String m = restClient.post()
-				.uri("/test")
-				.retrieve()
-				.body(String.class);
-		System.out.println(m);
-	}
-
-	@Test
-	void createStudent(){
-		Student s = new Student();
-		s.setAge(1);
-		s.setId(1L);
-		s.setName("Babu");
-		s.setGrade("A+");
-		s.setEmail("@fd");
-
-		String m = restClient.post()
-				.uri("/student")
-				.contentType(MediaType.APPLICATION_JSON)
-				.body(s)
-				.retrieve()
-				.body(String.class);
-
-		System.out.println(m);
-	}
-	@Test
-	void createStudent1(){
-		Student s = new Student();
-		s.setAge(1);
-		s.setId(1L);
-		s.setName("Babu");
-		s.setGrade("A+");
-		s.setEmail("@fd");
-
-		RestTemplate restTemplate = new RestTemplate();
-		String m = restTemplate.postForObject("http://localhost:8000/student", s, String.class);
-		System.out.println(m);
-	}
-
-	@Test
-	void t(){
-		postService.getAllPost();
-	}
 
 }
