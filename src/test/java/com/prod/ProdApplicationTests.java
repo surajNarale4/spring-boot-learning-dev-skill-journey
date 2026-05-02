@@ -3,6 +3,8 @@ package com.prod;
 import com.prod.clients.Student;
 import com.prod.clients.StudentClient;
 import com.prod.config.RestClientConfig;
+import com.prod.entities.User;
+import com.prod.services.JwtService;
 import com.prod.services.PostServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -43,8 +45,13 @@ class ProdApplicationTests {
 
 	@Test
 	void l(){
-		postService.getPostById(100L);
+
+		JwtService service=new JwtService();
+		User user = User.builder().email("rj@").build();
+		System.out.println(service.generateJWT(user));
 	}
+
+
 
 
 }

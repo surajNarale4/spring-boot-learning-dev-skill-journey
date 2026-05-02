@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "getAuditAware")
@@ -17,8 +18,12 @@ public class AppConfig {
         return new ModelMapper();
     }
 
+
+
     @Bean
     AuditorAware<String> getAuditAware(){
         return new AuditAwareImpl();
     }
+
+
 }
