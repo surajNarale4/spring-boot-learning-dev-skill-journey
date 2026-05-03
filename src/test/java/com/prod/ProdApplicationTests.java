@@ -48,7 +48,8 @@ class ProdApplicationTests {
 
 		JwtService service=new JwtService();
 		User user = User.builder().email("rj@").build();
-		System.out.println(service.generateJWT(user));
+		String token=service.generateJWT(user);
+		System.out.println(service.parseJwt(token));
 	}
 
 

@@ -7,18 +7,23 @@ import io.jsonwebtoken.security.Keys;
 import org.modelmapper.internal.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@Service
 public class JwtService {
     @Value("{jwt.secret}")
-    String mySecretKey="hqwdjnqdkwqdnqwdjnqndwjdnqdu382u9uedj3ij9m21e9wj129ue129ewjs921prm31ne2udg13yd3i1hdu1oj2ond12he3ud1hio12ws";
+    private String mySecretKey="hqwdjnqdkwqdnqwdjnqndwjdnqdu382u9uedj3ij9m21e9wj129ue129ewjs921prm31ne2udg13yd3i1hdu1oj2ond12he3ud1hio12ws";
+
+    private final Key key=Keys.hmacShaKeyFor(mySecretKey.getBytes(StandardCharsets.UTF_8));
 
     public String generateJWT(User user){
-        Key key= Keys.hmacShaKeyFor(mySecretKey.getBytes(StandardCharsets.UTF_8));
+
         return Jwts.builder()
                 .subject(user.getUsername())
                 .claim("email",user.getUsername())
@@ -27,5 +32,15 @@ public class JwtService {
                 .expiration(new Date(System.currentTimeMillis()+6000000))
                 .signWith(key)
                 .compact();
+    }
+
+    public Object parseJwt(String jwt){
+
+        return Jwts.parser()
+                .verifyWith((SecretKey) key)
+                .build()
+                .parse(jwt)
+                .getPayload();
+
     }
 }
