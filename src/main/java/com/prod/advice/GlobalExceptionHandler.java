@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiError> oneForALl(ResourceNotFoundException e){
+    public ResponseEntity<ApiError> oneForALl(Exception e){
         ApiError error=new ApiError(e.getMessage(),HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(error, HttpStatusCode.valueOf(400));
     }

@@ -18,22 +18,17 @@ public class WebAuthConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
         httpSecurity
-                .formLogin(Customizer.withDefaults())
+
+                .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
-                        re->re.requestMatchers("/posts").permitAll()
+                        re->re.requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/posts/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
                 )
                 .cors(c->c.disable())
-
-         ;
+                .csrf(c->c.disable());
 
         return httpSecurity.build();
     }
 
-    @Bean
-    UserDetailsService userDetailsService(){
-        UserDetails user = User.builder().username("susu").password("susu").roles("ADMIN").build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
 }
