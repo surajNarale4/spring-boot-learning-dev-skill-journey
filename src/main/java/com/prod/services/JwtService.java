@@ -2,6 +2,7 @@ package com.prod.services;
 
 
 import com.prod.entities.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.modelmapper.internal.bytebuddy.asm.Advice;
@@ -28,19 +29,27 @@ public class JwtService {
                 .subject(user.getUsername())
                 .claim("email",user.getUsername())
                 .claim("role",user.getAuthorities())
+                .claim("id",user.getId())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis()+6000000))
+                .expiration(new Date(System.currentTimeMillis()+60000))
                 .signWith(key)
                 .compact();
     }
 
-    public Object parseJwt(String jwt){
+    public Claims parseJwt(String jwt){
 
         return Jwts.parser()
                 .verifyWith((SecretKey) key)
                 .build()
-                .parse(jwt)
+                .parseSignedClaims(jwt)
                 .getPayload();
 
+
     }
+
+    public Long getIdFromToken(String token){
+        Claims payload = parseJwt(token);
+        return payload.get("id",Long.class);
+    }
+
 }
