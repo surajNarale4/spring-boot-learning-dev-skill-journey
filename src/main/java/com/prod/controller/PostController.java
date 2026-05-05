@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
+    @PreAuthorize("hasRole('CREATOR')")
     public PostDTO getPostById(@PathVariable Long postId){
         return postService.getPostById(postId);
     }
