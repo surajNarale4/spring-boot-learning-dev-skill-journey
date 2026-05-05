@@ -1,9 +1,11 @@
 package com.prod.services;
 
-import com.prod.dto.LoginDto;
+import com.prod.dto.LoginRequestDto;
+import com.prod.dto.LoginResponseDTO;
 import com.prod.dto.UserDto;
 import com.prod.entities.User;
 import com.prod.repositories.UserRepository;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -43,7 +45,7 @@ public class AuthService {
 
     }
 
-    public String login(LoginDto login) {
+    public LoginResponseDTO login(LoginRequestDto login) {
         log.debug("login password : "+login.getPassword());
         log.debug("for login user encoded password is : "+passwordEncoder.encode(login.getPassword()));
         Authentication authentication=authenticationManager.authenticate(
@@ -51,7 +53,29 @@ public class AuthService {
         );
 
         User user= (User)authentication.getPrincipal();
-        return jwtService.generateJWT(user);
+        String accessToken= jwtService.generateJWT(user);
+        String refreshToken=jwtService.generateRefreshToken(jwtService.getIdFromToken(accessToken));
+        return new LoginResponseDTO(accessToken,refreshToken);
 
+    }
+
+
+    public String generateRefreshToken(Cookie[] cookies) {
+
+        if(cookies == null){
+            throw new RuntimeException("no refresh token found");
+        }
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("refreshToken")){
+                String refreshToken=cookie.getValue();
+                Long id=jwtService.getIdFromToken(refreshToken); //chacking valid or not
+                User user=userRepository.findById(id)
+                        .orElseThrow((
+                        )->new RuntimeException("no user found with given id"+ id)
+                        );
+                return jwtService.generateJWT(user);
+            }
+        }
+        throw new RuntimeException("no refresh token found");
     }
 }

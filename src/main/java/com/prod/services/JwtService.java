@@ -29,7 +29,7 @@ public class JwtService {
                 .subject(user.getUsername())
                 .claim("email",user.getUsername())
                 .claim("role",user.getAuthorities())
-                .claim("id",user.getId())
+                .claim("userId",user.getId())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+60000))
                 .signWith(key)
@@ -49,7 +49,16 @@ public class JwtService {
 
     public Long getIdFromToken(String token){
         Claims payload = parseJwt(token);
-        return payload.get("id",Long.class);
+        return payload.get("userId",Long.class);
+    }
+
+    public String generateRefreshToken(Long userId){
+        return Jwts.builder()
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis()+3600000*24))
+                .claim("userId",userId)
+                .signWith(key)
+                .compact();
     }
 
 }
