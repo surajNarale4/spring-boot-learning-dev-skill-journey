@@ -1,6 +1,7 @@
 package com.prod.config;
 
 
+import com.prod.entities.enums.Roles;
 import com.prod.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,7 @@ public class WebAuthConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         re->re.requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/posts/**").hasRole(Roles.ADMIN.name())
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
