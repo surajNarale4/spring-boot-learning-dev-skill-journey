@@ -7,6 +7,7 @@ import com.prod.services.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public List<PostEntity> getAllPosts(){
         return postService.getAllPost();
     }

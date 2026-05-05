@@ -30,7 +30,7 @@ public class WebAuthConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         re->re.requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/posts/**").hasRole(Roles.ADMIN.name())
+
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

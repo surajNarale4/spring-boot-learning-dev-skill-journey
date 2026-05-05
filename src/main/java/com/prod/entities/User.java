@@ -1,6 +1,7 @@
 package com.prod.entities;
 
 
+import com.prod.entities.enums.Permission;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
@@ -32,6 +33,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Set<Roles> roles;
+
+    @Enumerated(EnumType.STRING)
+    private Set<Permission> permissions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
