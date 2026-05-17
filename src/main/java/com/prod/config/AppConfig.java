@@ -2,6 +2,7 @@ package com.prod.config;
 
 
 import com.prod.auth.AuditAwareImpl;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AppConfig {
 
     @Bean
-    ModelMapper getModelMapper(){
-        return new ModelMapper();
-    }
-
+    public ModelMapper getModelMapper(){ return new ModelMapper();}
 
 
     @Bean

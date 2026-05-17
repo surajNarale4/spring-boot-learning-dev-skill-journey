@@ -5,6 +5,7 @@ import com.prod.entities.PostEntity;
 import com.prod.exception.ResourceNotFoundException;
 import com.prod.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ public class PostServiceImpl implements PostService{
 
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
+
     private final static Logger  logger= LoggerFactory.getLogger(PostServiceImpl.class);
     @Override
     public List<PostEntity> getAllPost() {

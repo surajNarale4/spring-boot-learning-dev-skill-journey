@@ -13,6 +13,7 @@ public class DevWebConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
+
         httpSecurity.formLogin(c->c.disable());
         httpSecurity.httpBasic(c->c.disable());
         httpSecurity.authorizeHttpRequests(any-> any.anyRequest().permitAll());

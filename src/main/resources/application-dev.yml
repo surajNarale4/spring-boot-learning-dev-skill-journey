@@ -9,7 +9,7 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        options: gemma3:4b
+        model: gemma3:4b
 
 logging:
   level:

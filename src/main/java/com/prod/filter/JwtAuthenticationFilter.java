@@ -24,13 +24,13 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 @Profile("prod")
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
     private final JwtService jwtService;
     private final UserService userService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException{
         String token= request.getHeader("Authorization");
 
         if(token == null || !token.startsWith("Bearer")){
@@ -48,6 +48,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
-    filterChain.doFilter(request,response);
+        filterChain.doFilter(request,response);
     }
 }

@@ -4,7 +4,7 @@ package com.prod.services;
 import com.prod.entities.User;
 import com.prod.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,11 +14,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Profile("!dev")
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
+
     private final PasswordEncoder passwordEncoder;
 
 
